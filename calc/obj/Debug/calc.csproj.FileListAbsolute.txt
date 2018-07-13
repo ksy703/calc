@@ -8,3 +8,13 @@ C:\Users\Admin\Desktop\calc\calc\obj\Debug\calc.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Desktop\calc\calc\obj\Debug\calc.exe
 C:\Users\Admin\Desktop\calc\calc\obj\Debug\calc.pdb
 C:\Users\Admin\Desktop\calc\calc\obj\Debug\calc.csprojAssemblyReference.cache
+C:\Users\Honeywell\Desktop\ksy\calc\calc\bin\Debug\calc.exe.config
+C:\Users\Honeywell\Desktop\ksy\calc\calc\bin\Debug\calc.exe
+C:\Users\Honeywell\Desktop\ksy\calc\calc\bin\Debug\calc.pdb
+C:\Users\Honeywell\Desktop\ksy\calc\calc\obj\Debug\calc.csprojAssemblyReference.cache
+C:\Users\Honeywell\Desktop\ksy\calc\calc\obj\Debug\calc.Form1.resources
+C:\Users\Honeywell\Desktop\ksy\calc\calc\obj\Debug\calc.Properties.Resources.resources
+C:\Users\Honeywell\Desktop\ksy\calc\calc\obj\Debug\calc.csproj.GenerateResource.cache
+C:\Users\Honeywell\Desktop\ksy\calc\calc\obj\Debug\calc.csproj.CoreCompileInputs.cache
+C:\Users\Honeywell\Desktop\ksy\calc\calc\obj\Debug\calc.exe
+C:\Users\Honeywell\Desktop\ksy\calc\calc\obj\Debug\calc.pdb

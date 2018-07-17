@@ -24,15 +24,15 @@ namespace calc
             textBox1.Text += _button.Text;
             
         }
-        private void newText_KeyDown(object sender, KeyEventArgs e)
+        private void Text_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            
+            if (e.KeyCode == Keys.Return)
             {
-                var cal = textBox1.Text.ToCharArray();
-                string s = calculate(cal);
-                textBox1.Text = s;
+                this.button_e_Click(sender, e);
             }
-                
+           
+
         }
 
         private void button_close_Click(object sender, EventArgs e)
@@ -57,29 +57,30 @@ namespace calc
         }
         private string make_answer(string s)
         {
-            var cal = s.ToCharArray();
+            string[] cal = s.Split(' ');
+            
             string[] stack = new string[30];
             int cnt = 0;
             for(int i = 0; i < cal.Length; i++)
             {
-                if (cal[i] == '+')
+                if (cal[i].Equals("+"))
                 {
                     int a = Convert.ToInt32(stack[cnt - 2]) + Convert.ToInt32(stack[cnt - 1]);
                     stack[cnt - 2] = a.ToString();
                     cnt--;
-                }else if (cal[i] == '-')
+                }else if (cal[i].Equals("-"))
                 {
                     int a = Convert.ToInt32(stack[cnt - 2]) - Convert.ToInt32(stack[cnt - 1]);
                     stack[cnt - 2] = a.ToString();
                     cnt--;
                 }
-                else if (cal[i] == '*')
+                else if (cal[i].Equals("*"))
                 {
                     int a = Convert.ToInt32(stack[cnt - 2]) * Convert.ToInt32(stack[cnt - 1]);
                     stack[cnt - 2] = a.ToString();
                     cnt--;
                 }
-                else if (cal[i] == '/')
+                else if (cal[i].Equals("/"))
                 {
                     float a = Convert.ToInt32(stack[cnt - 2]) / Convert.ToInt32(stack[cnt - 1]);
                     stack[cnt - 2] = a.ToString();
@@ -87,7 +88,7 @@ namespace calc
                 }
                 else
                 {
-                    stack[cnt] = cal[i].ToString();
+                    stack[cnt] = cal[i];
                     cnt++;
                 }
             }return stack[0];
@@ -120,7 +121,12 @@ namespace calc
                         m += cal[i];
                         i++;
                     }
+                    if (exp!="")
+                    {
+                        exp += " ";
+                    }
                     exp += calculate(m.ToCharArray());
+                    
                 }
 
                 else if(cal[i]=='+'||cal[i]=='-'||cal[i]=='*'||cal[i]=='/'){
@@ -130,7 +136,7 @@ namespace calc
                         int postprt = get_prt(stack[cnt - 1]);
                         while (prt <= postprt&&cnt>0)
                         {
-                            exp += stack[cnt - 1];
+                            exp += " "+stack[cnt - 1];
                             cnt--;
                         }
                     }
@@ -139,12 +145,29 @@ namespace calc
                 }
                 else
                 {
-                    exp += cal[i];
+                    if (i>=1&&cal[i - 1] - '0' >= 0 && cal[i - 1] - '0' <= 9)
+                    {
+                        exp += cal[i];
+                    }
+                    else if (i == 0)
+                    {
+                        exp += cal[i];
+                    }
+                    else
+                    {
+                        exp += " " + cal[i];
+                    }
+                    
                 }
-            }exp += stack[0];
+            }
+            while(cnt>0)
+            {
+                exp += " " + stack[cnt-1];
+                cnt--;
+            }
+            
             return exp;
         }
-
         
     }
 }

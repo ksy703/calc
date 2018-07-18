@@ -51,6 +51,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.textBox1.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(23, 26);
             this.textBox1.Name = "textBox1";
@@ -167,7 +168,7 @@
             this.button11.TabIndex = 11;
             this.button11.Text = ")";
             this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button_close_Click);
+            this.button11.Click += new System.EventHandler(this.button_Click);
             // 
             // button12
             // 
@@ -237,7 +238,7 @@
             this.button18.TabIndex = 18;
             this.button18.Text = "(";
             this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(this.button_open_Click);
+            this.button18.Click += new System.EventHandler(this.button_Click);
             // 
             // Form1
             // 
@@ -265,6 +266,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "Calc";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Text_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,4 +295,3 @@
         private System.Windows.Forms.Button button18;
     }
 }
-

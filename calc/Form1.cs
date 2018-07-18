@@ -16,46 +16,42 @@ namespace calc
         {
             InitializeComponent();
         }
-        
-        private void button_Click(object sender, EventArgs e)
-        {
-            Button _button;
-            _button = (Button)sender;
-            textBox1.Text += _button.Text;
-            
-        }
         private void Text_KeyDown(object sender, KeyEventArgs e)
         {
-            
+
             if (e.KeyCode == Keys.Return)
             {
-                this.button_e_Click(sender, e);
+                button_e_Click(sender, e);
             }
-           
-
         }
 
-        private void button_close_Click(object sender, EventArgs e)
-        {
-            textBox1.Text += button11.Text;    
-        }
-        private void button_open_Click(object sender, EventArgs e)
-        {
-            textBox1.Text += button18.Text;
-        }
         private void button_C_Click(object sender, EventArgs e)
         {
+            textBox1.Focus();
             textBox1.Text = string.Empty;
         }
 
         private void button_e_Click(object sender, EventArgs e)
         {
-            var cal=textBox1.Text.ToCharArray();
-            string s = calculate(cal);
-            string ans = make_answer(s);
+            var cal = textBox1.Text.ToCharArray();
+            string s = postfix(cal);
+            string ans = calculate(s);
+            textBox1.Focus();
             textBox1.Text = ans;
+            textBox1.SelectionStart=textBox1.Text.Length;
         }
-        private string make_answer(string s)
+        private void button_Click(object sender, EventArgs e)
+        {
+            Button _button;
+            _button = (Button)sender;
+            textBox1.Focus();
+            textBox1.Text += _button.Text;
+            textBox1.SelectionStart=textBox1.Text.Length;
+        }
+
+
+        //답 계산
+        private string calculate(string s)
         {
             string[] cal = s.Split(' ');
             
@@ -94,6 +90,7 @@ namespace calc
             }return stack[0];
         }
 
+        //계산 우선순위
         private int get_prt(char c)
         {
             if (c == '*' || c == '/')
@@ -105,7 +102,9 @@ namespace calc
                 return 5;
             }
         }
-        private string calculate(char[] cal)
+
+        //후위표기법으로 변경
+        private string postfix(char[] cal)
         {
             string exp = "";
             char[] stack = new char[30];
@@ -125,7 +124,7 @@ namespace calc
                     {
                         exp += " ";
                     }
-                    exp += calculate(m.ToCharArray());
+                    exp += postfix(m.ToCharArray());
                     
                 }
 
@@ -145,11 +144,7 @@ namespace calc
                 }
                 else
                 {
-                    if (i>=1&&cal[i - 1] - '0' >= 0 && cal[i - 1] - '0' <= 9)
-                    {
-                        exp += cal[i];
-                    }
-                    else if (i == 0)
+                    if (i==0||(i>=1&&cal[i - 1] - '0' >= 0 && cal[i - 1] - '0' <= 9))
                     {
                         exp += cal[i];
                     }

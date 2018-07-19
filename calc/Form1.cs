@@ -61,24 +61,24 @@ namespace calc
             {
                 if (cal[i].Equals("+"))
                 {
-                    int a = Convert.ToInt32(stack[cnt - 2]) + Convert.ToInt32(stack[cnt - 1]);
+                    Double a = Convert.ToDouble(stack[cnt - 2]) + Convert.ToDouble(stack[cnt - 1]);
                     stack[cnt - 2] = a.ToString();
                     cnt--;
                 }else if (cal[i].Equals("-"))
                 {
-                    int a = Convert.ToInt32(stack[cnt - 2]) - Convert.ToInt32(stack[cnt - 1]);
+                    Double a = Convert.ToDouble(stack[cnt - 2]) - Convert.ToDouble(stack[cnt - 1]);
                     stack[cnt - 2] = a.ToString();
                     cnt--;
                 }
                 else if (cal[i].Equals("*"))
                 {
-                    int a = Convert.ToInt32(stack[cnt - 2]) * Convert.ToInt32(stack[cnt - 1]);
+                    Double a = Convert.ToDouble(stack[cnt - 2]) * Convert.ToDouble(stack[cnt - 1]);
                     stack[cnt - 2] = a.ToString();
                     cnt--;
                 }
                 else if (cal[i].Equals("/"))
                 {
-                    float a = Convert.ToInt32(stack[cnt - 2]) / Convert.ToInt32(stack[cnt - 1]);
+                    Double a = Convert.ToDouble(stack[cnt - 2]) / Convert.ToDouble(stack[cnt - 1]);
                     stack[cnt - 2] = a.ToString();
                     cnt--;
                 }
@@ -144,7 +144,7 @@ namespace calc
                 }
                 else
                 {
-                    if (i==0||(i>=1&&cal[i - 1] - '0' >= 0 && cal[i - 1] - '0' <= 9))
+                    if (i==0||(i>=1&&(cal[i - 1] - '0' >= 0 && cal[i - 1] - '0' <= 9)||(cal[i-1]=='.')))
                     {
                         exp += cal[i];
                     }

@@ -18,7 +18,6 @@ namespace calc
         }
         private void Text_KeyDown(object sender, KeyEventArgs e)
         {
-
             if (e.KeyCode == Keys.Return)
             {
                 button_e_Click(sender, e);

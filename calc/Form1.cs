@@ -16,6 +16,7 @@ namespace calc
         {
             InitializeComponent();
         }
+        //Enter keydown
         private void Text_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Return)
@@ -23,22 +24,22 @@ namespace calc
                 button_e_Click(sender, e);
             }
         }
-
+        //C button click
         private void button_C_Click(object sender, EventArgs e)
         {
             textBox1.Focus();
             textBox1.Text = string.Empty;
         }
-
+        //= button click
         private void button_e_Click(object sender, EventArgs e)
         {
-            var cal = textBox1.Text.ToCharArray();
-            string s = postfix(cal);
-            string ans = calculate(s);
+            var formula = textBox1.Text.ToCharArray();
+            string ans = make_postfix(formula);
             textBox1.Focus();
             textBox1.Text = ans;
             textBox1.SelectionStart=textBox1.Text.Length;
         }
+        //나머지 button click
         private void button_Click(object sender, EventArgs e)
         {
             Button _button;
@@ -49,7 +50,7 @@ namespace calc
         }
 
 
-        //답 계산
+        //후위표기식 계산
         private string calculate(string s)
         {
             string[] cal = s.Split(' ');
@@ -101,15 +102,16 @@ namespace calc
                 return 5;
             }
         }
-
-        //후위표기법으로 변경
-        private string postfix(char[] cal)
+        
+        //get_prt로 계산 우선순위 결정, 후위표기법으로 변경
+        private string make_postfix(char[] cal)
         {
             string exp = "";
             char[] stack = new char[30];
             int cnt = 0;
             for (int i = 0; i < cal.Length; i++)
             {
+                //괄호
                 if(cal[i]=='(')
                 {
                     string m = "";
@@ -123,10 +125,10 @@ namespace calc
                     {
                         exp += " ";
                     }
-                    exp += postfix(m.ToCharArray());
+                    exp += make_postfix(m.ToCharArray());
                     
                 }
-
+                //수식
                 else if(cal[i]=='+'||cal[i]=='-'||cal[i]=='*'||cal[i]=='/'){
                     int prt = get_prt(cal[i]);
                     if (cnt != 0)
@@ -141,6 +143,7 @@ namespace calc
                     stack[cnt] = cal[i];
                     cnt++;
                 }
+                //숫자 또는 소수점
                 else
                 {
                     if (i==0||(i>=1&&(cal[i - 1] - '0' >= 0 && cal[i - 1] - '0' <= 9)||(cal[i-1]=='.')))
@@ -154,13 +157,14 @@ namespace calc
                     
                 }
             }
+            //stack에 남은 숫자들
             while(cnt>0)
             {
                 exp += " " + stack[cnt-1];
                 cnt--;
             }
             
-            return exp;
+            return calculate(exp);
         }
         
     }
